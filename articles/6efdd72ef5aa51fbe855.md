@@ -1,6 +1,6 @@
 ---
 title: "NuGetパッケージをGitHubPackagesにPushしようとして404が返ってくる場合の対処"
-emoji: "🔖"
+emoji: "🛠️"
 type: "tech"
 topics: ["GitHub","csharp","nuget","GitHubActions","GitHubPackages"]
 published: true

@@ -1,6 +1,6 @@
 ---
 title: "[Unity]WebGL: Server configuration for Nginx"
-emoji: "🔖"
+emoji: "🎮"
 type: "tech"
 topics: ["nginx","WebGL","Unity"]
 published: true
