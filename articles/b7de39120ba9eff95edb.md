@@ -13,9 +13,11 @@ nginx向けに書いて動作確認したものを掲載しておきます。
 ## 環境など
 
 - Unity 2020.2.0f
-- 使用したDockerイメージ: `nginx:alpine`
-- Herokuにホスティングする都合上、ポート番号が環境変数になっています。
-- gzip圧縮にのみ対応。Brotli圧縮の場合でも同じように書けばよいはず。
+- gzip圧縮のみ対応。Brotli圧縮の場合でも同じように書けばよいはず。
+
+:::message
+Herokuにホスティングして動作確認していたので、都合上、ポート番号が環境変数になっています。
+:::
 
 ## nginx.conf
 
@@ -58,7 +60,7 @@ server {
 若干ハック感ありますが、一応nginxの公式の記法に倣っています。
 [Module ngx_http_core_module#types](http://nginx.org/en/docs/http/ngx_http_core_module.html#types)
 
-追加モジュールが必要ですが、以下の方法で設定した方が可読性は高くなると思います。
+追加モジュールが必要ですが、以下の方法で設定すると可読性は高くなると思います。お好みで。
 [nginxでレスポンスヘッダを書き換える - Qiita](https://qiita.com/reiki4040/items/218438c6e32ba585fd99)
 
 ## 余談: Herokuデプロイ用のDockerfile
