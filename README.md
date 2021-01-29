@@ -1,4 +1,5 @@
-# Zenn Contents
+# Zenn
 
-* [📘 How to use](https://zenn.dev/zenn/articles/zenn-cli-guide)
-* [📘 Markdown guide](https://zenn.dev/zenn/articles/markdown-guide)
+技術系記事をZennに投稿しています。
+
+[https://zenn.dev/ushibutatory](https://zenn.dev/ushibutatory)
