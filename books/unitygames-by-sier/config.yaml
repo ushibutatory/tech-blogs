@@ -1,0 +1,12 @@
+title: "産業系SEの私が作ったUnityのゲームたち"
+summary: "産業系SEの私がUnity開発の中で学んだことや実践したことのまとめ"
+topics: ["markdown", "zenn", "react"] # トピック（5つまで）
+published: false
+price: 0
+toc_depth: 2
+chapters:
+  - intro
+  - what-write
+  - 1-3d_maze
+  - 2-hakoirimusume
+  - 3-seiza
