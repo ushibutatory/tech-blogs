@@ -6,7 +6,7 @@ price: 0
 toc_depth: 2
 chapters:
   - intro
-  - what-write
+  #- what-write
   - 1-3d_maze
   - 2-hakoirimusume
   - 3-seiza-1

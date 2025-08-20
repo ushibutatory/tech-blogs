@@ -100,7 +100,7 @@ title: "「星座づくり」(2) イベント"
     namespace StellaGenerator.Presentation.Events.System
     {
         /// <summary>
-        /// プレゼンテーションイベント: 効果音を再生する
+        /// プレゼンテーションイベント: 効果音を再生を要求する
         /// </summary>
         public record PlaySoundRequest : PresentationEvent
         {
