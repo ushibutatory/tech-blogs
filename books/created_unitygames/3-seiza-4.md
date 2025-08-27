@@ -118,7 +118,7 @@ namespace MyGame.Presentation
 
 ## 今回試したこと
 
-私は、コメントではなく構造で解決できないかと考えて、以下のような構成を試してみました。
+コメントではなく構造で解決できないかと考えて、以下のような構成を試してみました。
 
 ```csharp
 namespace MyGame.Presentation
