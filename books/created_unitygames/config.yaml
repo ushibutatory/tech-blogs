@@ -1,7 +1,7 @@
 title: "自作ゲームの設計パターン試行錯誤"
-summary: "自作ゲーム開発をする中で学んだことや実践したことのまとめです。実装よりも設計の話を多くしたいです。"
+summary: "自作ゲーム開発をする中で学んだことや実践したことを随時追加していきます。実装よりも設計の話を多くしたいです。"
 topics: ["unity"] # トピック（5つまで）
-published: false
+published: true
 price: 0
 toc_depth: 2
 chapters:
