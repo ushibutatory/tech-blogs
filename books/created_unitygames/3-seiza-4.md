@@ -4,6 +4,8 @@ title: "「星座づくり」(4) privateメンバ多すぎ問題への対処"
 
 MonoBehaviour を継承したコンポーネントは、private メンバが多くなりがちです。
 
+## 元のコード
+
 ```csharp
 namespace MyGame.Presentation
 {
@@ -73,7 +75,9 @@ namespace MyGame.Presentation
 }
 ```
 
-よくあるのは、装飾された目立つコメント行を間に挟むことだと思います。
+## よくある対応
+
+一番よく見かける対応は、装飾された目立つコメント行を間に挟むことだと思います。
 
 ```csharp
         // ======Inspectorで設定する項目======
@@ -111,6 +115,8 @@ namespace MyGame.Presentation
 
 ...
 ```
+
+## 今回試したこと
 
 私は、コメントではなく構造で解決できないかと考えて、以下のような構成を試してみました。
 
