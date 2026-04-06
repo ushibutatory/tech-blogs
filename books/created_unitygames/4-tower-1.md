@@ -30,11 +30,13 @@ title: "「タワーディフェンス」(1) 概要"
 
 ## ページ一覧
 
-- [アーキテクチャ](./4-rhythm-2)
-- [フォルダ構成](./4-rhythm-3)
-- [UI Toolkit関連の処理](./4-rhythm-4)
-- [シーン遷移のあれこれ](./4-rhythm-5)
-- [ScriptableObject](./4-rhythm-6)
+- [アーキテクチャ](./4-tower-2)
+- [フォルダ構成 - GitHubリポジトリ](./4-tower-3)
+- [フォルダ構成 - Unity](./4-tower-4)
+- [フォルダ構成 - C#](./4-tower-5)
+- [UI Toolkit関連の処理](./4-tower-6)
+- [シーン遷移のあれこれ](./4-tower-7)
+- [ScriptableObject](./4-tower-8)
 
 ## 反省点
 

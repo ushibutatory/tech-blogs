@@ -11,3 +11,7 @@
 ## 記述ポリシー
 
 `.github/instructions/writing-policy.instructions.md` を参照すること。
+
+## レビューワークフロー
+
+`.github/instructions/review-workflow.instructions.md` を参照すること。

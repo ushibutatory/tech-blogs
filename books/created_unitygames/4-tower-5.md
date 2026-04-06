@@ -164,7 +164,7 @@ MyGame.Infrastructure/
       Shop.cs            # ショップ（在庫状態など）
       ...
 
-  # 設定（ScritableObject）
+  # 設定（ScriptableObject）
   # （詳細は別ページに記述）
   Settings/
     General/
