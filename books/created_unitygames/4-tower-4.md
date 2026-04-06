@@ -10,70 +10,75 @@ title: "「タワーディフェンス」(4) フォルダ構成 - Unity"
 
 ```text
 Assets/
-|-- _Project/            # 原則、この中に成果物を入れる
-|  |
-|  |-- Scenes/           # シーン（.unity）
-|  |   |-- ...
-|  |
-|  |-- Prefabs/         
-|  |   |-- System/       # システム系コンポーネント（オーディオなど）
-|  |   |-- Common/       # 汎用プレハブ
-|  |   |   |-- Character/  
-|  |   |   |-- Environment/
-|  |   |   |-- UI/
-|  |   |   ...
-|  |   |-- Scene/         # シーンごとの固有プレハブ
-|  |       |-- Title/
-|  |       |   |-- Environment/
-|  |       |   |-- UI/
-|  |       |   ...
-|  |       |-- Home/
-|  |       |   |-- Environment/
-|  |       |   |-- UI/
-|  |       |   ...
-|  |
-|  |-- Scripts/          # C#（レイヤーごとにasmdefを作成する）
-|  |   |-- MyGame/
-|  |   |   |-- MyGame.asmdef
-|  |   |   ...
-|  |   |-- MyGame.Domain/      
-|  |   |   |-- MyGame.Domain.asmdef
-|  |   |   ...
-|  |   ...
-|  |
-|  |-- Scripts.Tests/    # テスト（ Scripts の隣に並ぶように命名）
-|  |   |-- MyGame.Tests/
-|  |   |-- MyGame.Domain.Tests/
-|  |   ...
-|  |
-|  |-- Art/              # アート関連
-|  |   |-- Environment/   # 環境（床、壁、建造物など）
-|  |   |   |-- Materials/ # マテリアル
-|  |   |   |-- Models/    # 3Dモデル
-|  |   |   |-- Textures/  # テクスチャ
-|  |   |-- Character/   # キャラクタ
-|  |   |-- Item/     # アイテム
-|  |   ...
-|  |
-|  |-- UI/                # UI関連
-|  |   |-- Templates/     # UXMLテンプレート
-|  |   |-- Components/    # 完成しているUI部品
-|  |   |-- Styles/          # USSファイル群
-|  |
-|  |-- Input/ # 入力管理
-|  |
-|  |-- Localization/    # ローカライゼーション関連
-|  |
-|  ...
-|
-|   # 自作でないものは `_Project` の外に置く
-|-- Plugins/
-|-- Packages/
-|
-|   # アート系アセットは元ファイルを以下に置き、Addressablesで管理する。
-|-- ThirdParty/
-|   |-- アセット名、配布サイト名 など
-|   ...
+  _Project/              # 原則、この中に成果物を入れる
+    Scenes/              # シーン（.unity）
+      ...
+
+    Prefabs/
+      System/            # システム系コンポーネント（オーディオなど）
+      Common/            # 汎用プレハブ
+        Character/
+        Environment/
+        UI/
+        ...
+      Scene/             # シーンごとの固有プレハブ
+        Title/
+          Environment/
+          UI/
+          ...
+        Home/
+          Environment/
+          UI/
+          ...
+
+    Scripts/             # C#（レイヤーごとにasmdefを作成する）
+      MyGame/
+        MyGame.asmdef
+        ...
+      MyGame.Domain/
+        MyGame.Domain.asmdef
+        ...
+    Scripts.Tests/       # テスト（Scripts の隣に並ぶように命名）
+      MyGame.Tests/
+        MyGame.Tests.asmdef
+        ...
+      MyGame.Domain.Tests/
+        MyGame.Domain.Tests.asmdef
+        ...
+
+    Settings              # Settings（ScriptableObject）群
+      ...
+
+    Art/                 # アート関連
+      Environment/       # 環境（床、壁、建造物など）
+        Materials/       # マテリアル
+        Models/          # 3Dモデル
+        Textures/        # テクスチャ
+      Character/         # キャラクタ
+      Item/              # アイテム
+      ...
+
+    UI/                  # UI Toolkit関連
+      Templates/         # UXMLテンプレート
+      Components/        # 完成しているUI部品
+      Styles/            # USSファイル群
+
+    Input/               # 入力管理
+      MyGameInputActions # .inputactions
+
+    Localization/        # ローカライゼーション関連
+      StringTables/
+        ...
+
+  # 外部アセット
+  # → `_Project` の外に置く
+  Plugins/
+  Packages/
+
+  # 外部アセットのうち特にアート系アセット
+  # → `_Project` の外に置き、Addressablesで管理する。
+  ThirdParty/
+    アセット名、配布サイト名 など
 ```
 
 ## 意識したこと
