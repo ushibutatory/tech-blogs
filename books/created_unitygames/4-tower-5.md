@@ -1,195 +1,301 @@
+﻿---
+title: "「タワーディフェンス」(5) UI Toolkit関連の処理"
 ---
-title: "「タワーディフェンス」(5) フォルダ構成 - C#"
----
 
-最終的に以下のようになりました。
+## 構成
 
-（見やすさのためにアルファベット順ではなく敢えて入れ替えていたりします）
+![]()
 
-## フォルダ構成（C# - VisualStudioプロジェクトの構成）
+### UIViewSection
+
+表示・操作するひとまとまりです。
+
+- UXMLに対応します。
+  - 複数の `VisualElement` を配置し、UIのまとまりを作成します。
+  - 「ヘッダー」「メニュー」「一覧」「詳細」など。
+  - UIイベントの購読や描画更新などを行います。
+- `MonoBehaviour` を継承しない。
+
+### UIView
+
+いわゆる「画面」です。
+
+- UXMLに対応します。
+  - 複数の `UIViewSection` をまとめ、ひとつの画面をデザインする。
+  - 「ショップ画面」「ステータス画面」など。
+- `MonoBehaviour` を継承しない。
+
+### UINavigator
+
+UIViewの状態を制御します。
+
+- 複数の `UIView` をまとめて、表示・非表示を制御します。
+- `MonoBehaviour` を継承する。
+
+### SceneContext
+
+シーン内で起きたイベントに応じてUINavigatorを制御します。
+
+- 例）
+  - ショップの前にプレイヤーが到着した → 遷移確認UIViewを表示する。
+  - OKが押された → 遷移確認UIViewを非表示にし、ショップメニューUIViewを表示する。
+
+`SceneContext` という名前は、そのシーンの最初から最後までを一貫して監視する理由から命名しました。
+（UIView表示切替の他、他シーンへの遷移なども行います）
+
+## 詳細
+
+### Unity
 
 ```text
-# 全体統制
-MyGame/
-  # - DIコンテナやライフサイクルの設定
-  # - 全体の初期化、DontDestroyOnLoadへの配置
-  LifetimeScopes/
-    RootLifetimeScope.cs   # ルート
-    Scenes/
-      BootstrapSceneLifetimeScope.cs
-      TitleSceneLifetimeScope.cs
-      ...
-```
-```text
-# アプリケーション層
-MyGame.Application/
-  # - ドメインのまとまりごとに名前空間を分ける
-  # 例）
-  Shop/
-    ShopSession.cs                 # ショップ機能のセッション
-    ShopSessionState.cs            # その状態
-    Events/
-      # アプリケーションイベント
-      PlayerPurchasedShopItem.cs   # プレイヤーがアイテムを購入した
-      ...
-    UseCases/
-      # ユースケース
-      ListPurchasableShopItem.cs   # 購入可能なアイテム一覧を取得する
-      PurchaseShopItem.cs          # アイテムを購入する
-      ...
-  Battle/
-    ...
-  System/
-    ...
-```
-```text
-# コア層
-MyGame.Core/
-  # - 全レイヤー共通のValueObjectや定数、列挙型を定義する
-  # 例）
-  Enemy/
-    EnemyId.cs    # etc.
-  # - 標準の Vector2, Vector3, float などに意味を付けた型定義もCoreで行う
-  Time/
-    Seconds.cs    # 秒
-  Space/
-    Angle.cs      # 角度
-    Speed.cs      # 速度
-    ...
-```
-```text
-# ドメイン層
-MyGame.Domain/
-  # - ドメインのまとまりごとに定義する
-  # - 簡略のためFunction以外は直下に配置するようにした
-  # 例）
-  Battle/
-    Enemy.cs             # エネミーのエンティティクラス
-    IEnemyFactory.cs     # Factoryインタフェース
-    Funcions/
-      CalculateDamage.cs               # ダメージ計算
-      CalculateEnemySpawnPosition.cs   # スポーン位置計算
-```
-```text
-# プレゼンテーション層
-MyGame.Presentation/
-  # MonoBehaviour系
-  Components/
-    Audio/
-      MusicPlayer.cs
-      SoundPlayer.cs
-    Battle/
-      Direction/
-        CameraController.cs  # カメラ本体
-        CameraMovable.cs     # カメラ移動機能
-        CameraShakable.cs    # カメラ振動機能
+Asset/
+  _Project/
+    UI/
+      Uxml/
+        ShopUIView.uxml
+      Uxml.Sections/
+        ShopHeaderUIViewSection.uxml
+        ShopMenuUIViewSection.uxml
         ...
-      Player/
-        PlayerController.cs        # プレイヤー本体
-        PlayerHurtBox.cs           # プレイヤー当たり判定
-        PlayerHurtBoxCollider.cs   # プレイヤー当たり判定用のコライダー
-        PlayerSpawner.cs           # プレイヤーの出現装置
+```
+
+### C#
+
+```csharp
+namespace MyGame.Presentation.UIs.Shop
+{
+    // UIViewSection
+    // - UIElementに対する表示や更新を行う
+    // - ボタン等のイベントを検知して公開する
+    public class ShopMenuUIViewSection : UIViewSection<ShopMenuUIViewSection>
+    {
+        private readonly Subject<Unit> _onBackButtonClicked = new();
+        public Observable<Unit> OnBackButtonClicked => _onBackButtonClicked;
+
+        // セクションに配置されるUIElement
+        [QueryKey("back-button")] private Button _backButton = default!;
         ...
-    
-  # コンポーネント間通信リクエスト（PresentationEvent）
-  # 上記のComponents/ではなく別の名前空間に分ける。
-  # （他コンポーネントはRequestだけを参照できればよいので）
-  Requests/
-    Audio/
-      PlayAudioRequest.cs
-      PauseAudioRequest.cs
-      UpdateVolumeRequest.cs
-      ...
-    Scene/
-      LoadSceneRequest.cs
-      ...
 
-  # InputSystem
-  Inputs/
-    InputMode.cs     # 入力モード列挙型
-    InputActions.cs  # （自動生成）
-    Modes/
-      GeneralUIMode.cs    # モードごとに入力の検知方法を定義する
-      PlayInGameMode.cs
-      PauseInGameMode.cs
-      ...
+        public override void Dispose()
+        {
+            _onBackButtonClicked?.Dispose();
+            ...
 
-  # シーン制御
-  # （詳細は別ページに記載）
-  Scenes/
-    SceneNavigator.cs   # シーンを読み込んだり遷移履歴を保持したりするクラス
-    ...
+            base.Dispose();
+        }
 
-  # UI Toolkit関連
-  # （詳細は別ページに記載）
-  UIs/
-    Shop/
-      ShopUIView.cs      # ショップUIの制御本体
-      Sections/
-        ShopMenuUIViewSection.cs     # ショップメニューセクション
-        ShopCatalogUIViewSection.cs  # 商品一覧セクション
-    ...
+        protected override void _SetSubscribes()
+        {
+            // UIElementのイベントを外部に通知する
+            _backButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                _onBackButtonClicked.OnNext(Unit.Default);
+            }).AddTo(_disposables);
+            ...
+        }
+    }
 
-```
-```text
-# インフラストラクチャ層
-MyGame.Infrastructure/
-  # アセット管理
-  AssetLists/
-    IAudioAssetList.cs    # インタフェース
-    AudioAssetList.cs     # 実装
-    ...
+    // UIView
+    // - セクションを複数組みあわせて画面を構成する
+    // - セクションで起きたイベントを外部に公開する
+    // - セクション同士を連携させる
+    public class ShopUIView : UIView<ShopUIView>
+    {
+        // セクションを注入する
+        [Inject] private readonly ShopHeaderUIViewSection _headerSection = default!;
+        [Inject] private readonly ShopMenuUIViewSection _menuSection = default!;
+        ...
 
-  # Factory実装
-  Factories/
-    EnemyFactory.cs
-    ...
-  
-  # Repository実装
-  Repositories/
-    PlayerProfileRepository.cs
-    ...
-  
-  # 外部ファイル保存
-  ExternalSave/
-    IExternalSaveDataStore.cs   # 外部ファイルI/Oインタフェース
-    SaveDataStores/
-      PlainJsonSaveDataStore.cs  # プレーンJson形式のファイルI/O実装
-      ...                        # 暗号化など追加していく
-                                 # （外部アセットを使う場合はちょっと変わるかもしれない）
-    SaveData.cs                  # セーブデータ本体
-    Sections/                    # 一定のまとまりごとに分ける
-      UserProfile.cs     # ユーザプロファイル（ゲーム進捗、アンロック状態など）
-      Player.cs          # プレイヤー（Lvなど）
-      Shop.cs            # ショップ（在庫状態など）
-      ...
+        // 各イベントを公開する
+        // （UIViewはユースケースを実行しない）
+        public Observable<ShopItemId> OnPurchaseButtonClicked => _purchaseSection.OnPurchaseButtonClicked;
+        public Observable<Unit> OnBackButtonClicked => _menuSection.OnBackButtonClicked;
 
-  # 設定（ScriptableObject）
-  # （詳細は別ページに記述）
-  Settings/
-    General/
-      GeneralSettingsContainer.cs                # 全体設定まとめ
-      AudioSettings.cs                           # オーディオ設定
-      ...
-    Battle/
-      BattleSettingsContainer.cs                 # バトル関連設定まとめ
-      BattleDirectionCameraMovableSettings.cs    # カメラ移動設定
-      BattleDirectionCameraShakableSettings.cs   # カメラ振動設定
-      ...
-    Enemy/
-      EnemySettingsContainer.cs    # エネミー設定まとめ
-      EnemyDefinition.cs           # エネミー定義
-      EnemySpawnSettings.cs        # エネミー出現設定
-      ...
+        protected override void _Initialize(VisualElement root)
+        {
+            // 各セクションをバインドする
+            _headerSection.Bind(root.Q<VisualElement>("section-header"));
+            _menuSection.Bind(root.Q<VisualElement>("section-menu"));
+            ...
+        }
+
+        protected override void _SetSubscribes()
+        {
+            // セクションで起こったイベントを別セクションに反映する
+            // （アプリケーション層を経由しない単純な処理）
+            _catalogSection.OnItemSelected.Subscribe(shopItem =>
+            {
+                // 例）一覧セクションで選択されたアイテムを詳細セクションに表示する
+                _purchaseSection.ViewDetail(shopItem);
+            }).AddTo(_disposables);
+            ...
+        }
+    }
+}
 ```
 
+UIViewが画面ひとつを表すので、画面切り替えを担うクラスを定義します。
+
+```csharp
+    public class HomeSceneUINavigator : SceneUINavigator<HomeSceneUINavigator>
+    {
+        // UXMLをアサイン
+        [SerializeField] private UIDocument _homeUIDocument = default!;
+        [SerializeField] private UIDocument _shopUIDocument = default!;
+        ...
+
+        // UIViewを注入
+        [Inject] private readonly HomeUIView _homeUIView = default!;
+        [Inject] private readonly ShopUIView _shopUIView = default!;
+        ...
+
+        // イベントを公開
+        public Observable<Unit> OnOpenShopButtonClicked => _homeUIView.OnShopButtonClicked;
+        public Observable<Unit> OnCloseShopButtonClicked => _shopUIView.OnBackButtonClicked;
+        ...
+
+        public void Initialize()
+        {
+            // UXMLとUIViewを関連付ける
+            _homeUIView.Bind(_homeUIDocument.rootVisualElement);
+            _shopUIView.Bind(_shopUIDocument.rootVisualElement);
+            ...
+
+            // 初期状態ではすべて非表示とする
+            HideAll();
+        }
+
+        public void HideAll()
+        {
+            Hide_Home();
+            Hide_Shop();
+            ...
+        }
+
+        // UIViewの表示切替
+        public void Show_Home() => _homeUIView.Show();
+        public void Hide_Home() => _homeUIView.Hide();
+
+        public void Show_Shop() => _shopUIView.Show();
+        public void Hide_Shop() => _shopUIView.Hide();
+
+        ...
+```
+
+UIの切り替えは、SceneContextクラスで定義します。
+SceneContextクラスは各シーンに1つずつ配置し、シーンの初期化、イベントや操作に応じてシーン遷移やUI切り替え、BGM変更、入力モードの変更などを行う独自クラスです。
+
+```csharp
+namespace MyGmae.Presentation.SceneManagement.Home
+{
+    public class HomeSceneContext : SceneContext<HomeSceneContext>
+    {
+        protected override SceneId SceneId => SceneId.Home;
+
+        ...
+
+        protected override void _Initialize(ISceneParameter.NoParameter parameter)
+        {
+            // 入力無効化
+            _presentation.InputActions.DisableAll();
+
+            // BGM開始
+            _presentation.PlayMusicRequest.Publish(new PlayMusicRequest
+            {
+                MusicId = MusicId.Home,
+            });
+
+            // UI初期化
+            _presentation.UINavigator.Initialize();
+
+            // ホームセッションを開始
+            _application.StartHomeSession.ExecuteAsync().Forget();
+        }
+
+        protected override void _SetupSubscribes()
+        {
+            ...
+
+            _presentation.UINavigator.OnOpenShopButtonClicked.Subscribe(async _ =>
+            {
+                await UniTask.WhenAll(
+                    UniTask.Create(async () =>
+                    {
+                        // カメラ移動
+                        await _presentation.Camera.Movable.MoveToShopPositionAsync();
+                    }),
+                    UniTask.Create(async () =>
+                    {
+                        // 入力モード設定
+                        _presentation.InputActions.SetInputMode(InputMode.Common_UI);
+
+                        // UI非表示
+                        _presentation.UINavigator.Hide_Home();
+                    }));
+
+                // UI表示
+                _presentation.UINavigator.Show_Shop();
+            }).AddTo(this);
+
+            _presentation.UINavigator.OnCloseShopButtonClicked.Subscribe(async _ =>
+            {
+                await UniTask.WhenAll(
+                    UniTask.Create(async () =>
+                    {
+                        // カメラ移動
+                        await _presentation.Camera.Movable.MoveToHomePositionAsync();
+                    }),
+                    UniTask.Create(async () =>
+                    {
+                        // 入力モード設定
+                        _presentation.InputActions.SetInputMode(InputMode.Common_UI);
+
+                        // UI非表示
+                        _presentation.UINavigator.Hide_Shop();
+                    }));
+
+                // UI表示
+                _presentation.UINavigator.Show_Home();
+            }).AddTo(this);
+
+            _presentation.OnEnteringBattle.Subscribe(_ =>
+            {
+                // ホームセッション終了
+                _application.EndHomeSession.Execute();
+
+                // シーン遷移：バトルへ
+                _presentation.LoadSceneRequest.Publish(LoadSceneRequest.Load(SceneId.Battle, new BattleSceneParameter
+                {
+                    ...
+                }));
+            }).AddTo(this);
+
+            ...
+```
+
+## USS
+
+以下のような構成にしました。
+
 ```text
-# エディタ拡張
-MyGame.Editor/
-  # 自作クラスのインスペクター表示等
-  # （割愛）
+# デバッグ用のスタイル
+__debug.uss       # 本来透明な領域に色をつけて確認しやすくするなど
+
+# 汎用スタイル
+_components.uss   # ボタンやテキスト等の共通スタイル
+_layouts.uss      # ヘッダ、フッタ、各種エリアの幅など
+_variables.uss    # 変数定義（フォントサイズ等）
+
+# 個別スタイル
+HomeUIView.uss
+ShopUIView.uss
+...
 ```
 
 ## 所感
 
-つい付けたくなる汎用的なサフィックス（Controller、Managerなど）をあちこちで付けないように苦労しました。
+初めて触ったので非常に苦戦しました。
+特に MonoBehaviour でないものを画面上で動作させる、という感覚が掴めませんでした（今も怪しい）。
+
+個人的には「UI」という言葉がすごく曖昧な概念に感じます。
+かといって「HUD」とも違うようなUIは、いつも「画面」という言い方になってしまいます。

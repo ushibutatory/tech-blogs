@@ -1,135 +1,195 @@
-﻿---
-title: "「タワーディフェンス」(4) フォルダ構成 - Unity"
+---
+title: "「タワーディフェンス」(4) フォルダ構成 - C#"
 ---
 
 最終的に以下のようになりました。
 
 （見やすさのためにアルファベット順ではなく敢えて入れ替えていたりします）
 
-## フォルダ構成（Unityプロジェクト）
+## フォルダ構成（C# - VisualStudioプロジェクトの構成）
 
 ```text
-Assets/
-  _Project/              # 原則、この中に成果物を入れる
-    Scenes/              # シーン（.unity）
+# 全体統制
+MyGame/
+  # - DIコンテナやライフサイクルの設定
+  # - 全体の初期化、DontDestroyOnLoadへの配置
+  LifetimeScopes/
+    RootLifetimeScope.cs   # ルート
+    Scenes/
+      BootstrapSceneLifetimeScope.cs
+      TitleSceneLifetimeScope.cs
+      ...
+```
+```text
+# アプリケーション層
+MyGame.Application/
+  # - ドメインのまとまりごとに名前空間を分ける
+  # 例）
+  Shop/
+    ShopSession.cs                 # ショップ機能のセッション
+    ShopSessionState.cs            # その状態
+    Events/
+      # アプリケーションイベント
+      PlayerPurchasedShopItem.cs   # プレイヤーがアイテムを購入した
+      ...
+    UseCases/
+      # ユースケース
+      ListPurchasableShopItem.cs   # 購入可能なアイテム一覧を取得する
+      PurchaseShopItem.cs          # アイテムを購入する
+      ...
+  Battle/
+    ...
+  System/
+    ...
+```
+```text
+# コア層
+MyGame.Core/
+  # - 全レイヤー共通のValueObjectや定数、列挙型を定義する
+  # 例）
+  Enemy/
+    EnemyId.cs    # etc.
+  # - 標準の Vector2, Vector3, float などに意味を付けた型定義もCoreで行う
+  Time/
+    Seconds.cs    # 秒
+  Space/
+    Angle.cs      # 角度
+    Speed.cs      # 速度
+    ...
+```
+```text
+# ドメイン層
+MyGame.Domain/
+  # - ドメインのまとまりごとに定義する
+  # - 簡略のためFunction以外は直下に配置するようにした
+  # 例）
+  Battle/
+    Enemy.cs             # エネミーのエンティティクラス
+    IEnemyFactory.cs     # Factoryインタフェース
+    Funcions/
+      CalculateDamage.cs               # ダメージ計算
+      CalculateEnemySpawnPosition.cs   # スポーン位置計算
+```
+```text
+# プレゼンテーション層
+MyGame.Presentation/
+  # MonoBehaviour系
+  Components/
+    Audio/
+      MusicPlayer.cs
+      SoundPlayer.cs
+    Battle/
+      Direction/
+        CameraController.cs  # カメラ本体
+        CameraMovable.cs     # カメラ移動機能
+        CameraShakable.cs    # カメラ振動機能
+        ...
+      Player/
+        PlayerController.cs        # プレイヤー本体
+        PlayerHurtBox.cs           # プレイヤー当たり判定
+        PlayerHurtBoxCollider.cs   # プレイヤー当たり判定用のコライダー
+        PlayerSpawner.cs           # プレイヤーの出現装置
+        ...
+    
+  # コンポーネント間通信リクエスト（PresentationEvent）
+  # 上記のComponents/ではなく別の名前空間に分ける。
+  # （他コンポーネントはRequestだけを参照できればよいので）
+  Requests/
+    Audio/
+      PlayAudioRequest.cs
+      PauseAudioRequest.cs
+      UpdateVolumeRequest.cs
+      ...
+    Scene/
+      LoadSceneRequest.cs
       ...
 
-    Prefabs/
-      System/            # システム系コンポーネント（オーディオなど）
-      Common/            # 汎用プレハブ
-        Character/
-        Environment/
-        UI/
-        ...
-      Scene/             # シーンごとの固有プレハブ
-        Title/
-          Environment/
-          UI/
-          ...
-        Home/
-          Environment/
-          UI/
-          ...
-
-    Scripts/             # C#（レイヤーごとにasmdefを作成する）
-      MyGame/
-        MyGame.asmdef
-        ...
-      MyGame.Domain/
-        MyGame.Domain.asmdef
-        ...
-    Scripts.Tests/       # テスト（Scripts の隣に並ぶように命名）
-      MyGame.Tests/
-        MyGame.Tests.asmdef
-        ...
-      MyGame.Domain.Tests/
-        MyGame.Domain.Tests.asmdef
-        ...
-
-    Settings              # Settings（ScriptableObject）群
+  # InputSystem
+  Inputs/
+    InputMode.cs     # 入力モード列挙型
+    InputActions.cs  # （自動生成）
+    Modes/
+      GeneralUIMode.cs    # モードごとに入力の検知方法を定義する
+      PlayInGameMode.cs
+      PauseInGameMode.cs
       ...
 
-    Art/                 # アート関連
-      Environment/       # 環境（床、壁、建造物など）
-        Materials/       # マテリアル
-        Models/          # 3Dモデル
-        Textures/        # テクスチャ
-      Character/         # キャラクタ
-      Item/              # アイテム
+  # シーン制御
+  # （詳細は別ページに記載）
+  Scenes/
+    SceneNavigator.cs   # シーンを読み込んだり遷移履歴を保持したりするクラス
+    ...
+
+  # UI Toolkit関連
+  # （詳細は別ページに記載）
+  UIs/
+    Shop/
+      ShopUIView.cs      # ショップUIの制御本体
+      Sections/
+        ShopMenuUIViewSection.cs     # ショップメニューセクション
+        ShopCatalogUIViewSection.cs  # 商品一覧セクション
+    ...
+
+```
+```text
+# インフラストラクチャ層
+MyGame.Infrastructure/
+  # アセット管理
+  AssetLists/
+    IAudioAssetList.cs    # インタフェース
+    AudioAssetList.cs     # 実装
+    ...
+
+  # Factory実装
+  Factories/
+    EnemyFactory.cs
+    ...
+  
+  # Repository実装
+  Repositories/
+    PlayerProfileRepository.cs
+    ...
+  
+  # 外部ファイル保存
+  ExternalSave/
+    IExternalSaveDataStore.cs   # 外部ファイルI/Oインタフェース
+    SaveDataStores/
+      PlainJsonSaveDataStore.cs  # プレーンJson形式のファイルI/O実装
+      ...                        # 暗号化など追加していく
+                                 # （外部アセットを使う場合はちょっと変わるかもしれない）
+    SaveData.cs                  # セーブデータ本体
+    Sections/                    # 一定のまとまりごとに分ける
+      UserProfile.cs     # ユーザプロファイル（ゲーム進捗、アンロック状態など）
+      Player.cs          # プレイヤー（Lvなど）
+      Shop.cs            # ショップ（在庫状態など）
       ...
 
-    UI/                  # UI Toolkit関連
-      Templates/         # UXMLテンプレート
-      Components/        # 完成しているUI部品
-      Styles/            # USSファイル群
-
-    Input/               # 入力管理
-      MyGameInputActions # .inputactions
-
-    Localization/        # ローカライゼーション関連
-      StringTables/
-        ...
-
-  # 外部アセット
-  # → `_Project` の外に置く
-  Plugins/
-  Packages/
-
-  # 外部アセットのうち特にアート系アセット
-  # → `_Project` の外に置き、Addressablesで管理する。
-  ThirdParty/
-    アセット名、配布サイト名 など
+  # 設定（ScriptableObject）
+  # （詳細は別ページに記述）
+  Settings/
+    General/
+      GeneralSettingsContainer.cs                # 全体設定まとめ
+      AudioSettings.cs                           # オーディオ設定
+      ...
+    Battle/
+      BattleSettingsContainer.cs                 # バトル関連設定まとめ
+      BattleDirectionCameraMovableSettings.cs    # カメラ移動設定
+      BattleDirectionCameraShakableSettings.cs   # カメラ振動設定
+      ...
+    Enemy/
+      EnemySettingsContainer.cs    # エネミー設定まとめ
+      EnemyDefinition.cs           # エネミー定義
+      EnemySpawnSettings.cs        # エネミー出現設定
+      ...
 ```
 
-## 意識したこと
-
-### 単数形か、複数形か
-
-大まかに以下のような方針で名前をつけるようにしました。
-
-- **複数形** ... 同じ性質のもの（ファイル）を集めたもの
-  - C#ファイル（`.cs`）の集合 → `Scripts/`
-  - フォントアセット（`.ttf` + `.asset`）の集合 → `Fonts/`
-  - シーン（`.unity`）の集合 → `Scenes/`
-- **単数形** ... カテゴリやドメインで分類したもの
-  - キャラクター関連 → `Character/`
-  - UI 関連 → `UI/`
-
-ざっくり言うと、「～たち」と表せるものは複数形、「～関連」と表せるものは単数形、というイメージです。
-
-あとは Unity 業界の慣例や公式などを調べつつ、あまりにも圧倒的多数派がいるようであればそっちに寄せたり寄せなかったりしています。
-
-### `.asmdef` の管理
-
-アーキテクチャレイヤーごとに分けています。
-
-`Assembly-CSharp.dll` は使用せず、すべての C# ファイルが必ず何かしらの `.asmdef` で管理されるようにしました。
-
-また、レイヤー間の参照を明示的に管理するために、`_Project` 内にあるすべての `.asmdef` は `autoReferenced: false` にしています。
-（`Assembly-CSharp.dll`がなければ意味がない設定らしいですが）
-
-### ThirdPartyフォルダ
-
-インポートした外部アセットのうち、特にアート系アセットを入れています。
-AssetStoreからインポートした場合はそのフォルダ名のままとし、それ以外の配布サイト等から取得した場合は、ドメインをフォルダ名にして管理するようにしました。
-
-![ThirdPartyフォルダ](フォルダ構成とフォルダ名_ThirdParty.png)
-
-## 色々な悩み
-
-- 「`UI` は UIComponent の集合なんだから `UIs` または `UIComponents` ではないのか？」
-  - 今回は「キャラクター・環境・UI という分類」としました。
-  - 解釈なので、どっちでもいいと思います。
-- 「`Art`？　`Arts`？」
-  - 中に入っているファイルが 3D モデルだったりマテリアルだったり、色んな種類があるため「複数形の命名ルール」に当てはまらない、としました。
-  - でも、`Arts` でもいいと思います。
-- 「`Prefabs/Scene` は `Prefabs/Scenes` ではないのか？」
-  - シーン（`.unity`）を複数集めたフォルダではなく、「システム系・汎用・シーン固有 という分類」なので、`Prefabs/Scene` としました。
-  - ちなみにシーン（`.unity`）を集めたフォルダ名は「`Scenes`」としています。
-- 「`ThirdParty/` を分ける意味？」
-  - お借りしたアセット（成果物）と、自身の成果物を明確に区別するためです。
-  - ただし、 `Addressables` 内では区別なくラベリングしています。
+```text
+# エディタ拡張
+MyGame.Editor/
+  # 自作クラスのインスペクター表示等
+  # （割愛）
+```
 
 ## 所感
 
-途中でフォルダ構成を変えると参照が切れて大変だったので、できるだけ最初に固めたほうがいいなと思いました。
+つい付けたくなる汎用的なサフィックス（Controller、Managerなど）をあちこちで付けないように苦労しました。
