@@ -1,4 +1,4 @@
-﻿---
+---
 title: "「タワーディフェンス」(7) ScriptableObject"
 ---
 
