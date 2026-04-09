@@ -9,7 +9,7 @@ title: "「星座づくり」(1) アーキテクチャ"
 
 ちゃんとクリーンアーキテクチャになってないところもあります。後述します。
 
-![アーキテクチャ](https://github.com/ushibutatory/tech-blogs/blob/main/images/20250822_022612.png?raw=true)
+![アーキテクチャ](https://raw.githubusercontent.com/ushibutatory/tech-images/main/books/created_unitygames/3-seiza/%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3.png)
 
 ### ドメイン層
 
