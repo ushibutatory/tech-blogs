@@ -41,3 +41,10 @@ AI はコスト重視で`Groq API`を採用しました。
 - Node.js
 - `Groq SDK`
   - `Groq API` を実行するため
+
+## ページ一覧
+
+- [アーキテクチャ](./3-seiza-1)
+- [イベント](./3-seiza-2)
+- [外部APIの呼び出し](./3-seiza-3)
+- [privateメンバ多すぎ問題への対処](./3-seiza-4)
