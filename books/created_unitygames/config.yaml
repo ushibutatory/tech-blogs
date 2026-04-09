@@ -18,14 +18,14 @@ chapters:
   - 3-seiza-3
   - 3-seiza-4
   # [4] タワーディフェンス（Elemecho）
-  - 4-tower-0
-  - 4-tower-1
-  - 4-tower-2
-  - 4-tower-3
-  - 4-tower-4
-  - 4-tower-5
-  - 4-tower-6
-  - 4-tower-7
+  #- 4-tower-0
+  #- 4-tower-1
+  #- 4-tower-2
+  #- 4-tower-3
+  #- 4-tower-4
+  #- 4-tower-5
+  #- 4-tower-6
+  #- 4-tower-7
   # [x] 巻末
   - x-temp # 終わりページ
   - x-changelog # 変更履歴
