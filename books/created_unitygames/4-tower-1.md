@@ -44,7 +44,7 @@ public class Enemy
 
 #### ValueObject
 
-Core層で定義しました。
+[Core層のValueObject](#ValueObject)で後述しました。
 
 #### DomainFunction
 
@@ -157,6 +157,8 @@ public class SampleSession
 // ユースケース
 public class UpdateSampleData
 {
+    [Inject] private readonly HomeSessionManager _sessionManager = default!;
+
     public void Execute()
     {
         var session = _sessionManager.Current;
