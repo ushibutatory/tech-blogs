@@ -11,7 +11,7 @@ title: "「タワーディフェンス」(6) シーン遷移のあれこれ"
 
 ## パラメータ付きシーン遷移
 
-![シーン遷移](https://storage.googleapis.com/zenn-user-upload/662acda4ae3b-20260304.png)
+![シーン遷移](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/created_unitygames/4-tower/%E3%82%B7%E3%83%BC%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AE%E3%81%82%E3%82%8C%E3%81%93%E3%82%8C_%E3%82%B7%E3%83%BC%E3%83%B3%E9%81%B7%E7%A7%BB.png)
 
 ### コンポーネント
 
@@ -121,7 +121,7 @@ namespace Elemecho.Presentation.Events.System
 
 それぞれの遷移イメージは以下の通りです。
 
-![](https://storage.googleapis.com/zenn-user-upload/f4532140a72d-20260304.png)
+![シーン遷移の種類](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/created_unitygames/4-tower/%E3%82%B7%E3%83%BC%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AE%E3%81%82%E3%82%8C%E3%81%93%E3%82%8C_%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF.png)
 
 なお、 `LoadSceneMode` は常に `Single` としています。
 `Additive` が必要な場面では代わりに Prefab で代替しています。
