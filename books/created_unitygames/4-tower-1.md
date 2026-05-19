@@ -44,7 +44,7 @@ public class Enemy
 
 #### ValueObject
 
-[Core層のValueObject](#ValueObject)で後述しました。
+[Core層のValueObject](#Core-ValueObject)で後述しました。
 
 #### DomainFunction
 
@@ -204,6 +204,8 @@ MonoBehaviour は継承しません。UIToolkit関連については後述です
 ### Core 層
 
 #### ValueObject
+
+<a name="Core-ValueObject"></a>
 
 「値」のみを持つドメインモデルです。
 Entityと異なり「状態」を持ちません。イミュータブルです。
