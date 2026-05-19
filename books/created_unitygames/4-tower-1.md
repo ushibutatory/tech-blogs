@@ -4,7 +4,7 @@ title: "「タワーディフェンス」(1) アーキテクチャ"
 
 ## 全体像
 
-![アーキテクチャ全体]()
+![アーキテクチャ全体](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/created_unitygames/4-tower/%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3.png)
 
 ## 詳細
 
@@ -44,7 +44,7 @@ public class Enemy
 
 #### ValueObject
 
-Core層で定義しました。
+[Core層のValueObject](#Core-ValueObject)で後述しました。
 
 #### DomainFunction
 
@@ -157,6 +157,8 @@ public class SampleSession
 // ユースケース
 public class UpdateSampleData
 {
+    [Inject] private readonly HomeSessionManager _sessionManager = default!;
+
     public void Execute()
     {
         var session = _sessionManager.Current;
@@ -170,6 +172,7 @@ public class UpdateSampleData
 
 当プロジェクトでは、セッション内からのみ通知するものとしました。
 - セッション状態は複数のユースケースから操作されるため（通知漏れを防ぐため）。
+- じゃあ `SessionEvent` と名付ける方が良かったんじゃない？　と後から思いました。
 
 --- 
 
@@ -202,6 +205,8 @@ MonoBehaviour は継承しません。UIToolkit関連については後述です
 ### Core 層
 
 #### ValueObject
+
+<a name="Core-ValueObject"></a>
 
 「値」のみを持つドメインモデルです。
 Entityと異なり「状態」を持ちません。イミュータブルです。
@@ -263,7 +268,7 @@ Entityを永続化します。
 
 #### Setting
 
-ScriptableObject群です。（→[別ページ](./4-rhythm-5)）
+ScriptableObject群です。（→[別ページ](./4-tower-7)）
 定義した Setting はDIコンテナで各クラスに Inject します。
 
 ## 所感

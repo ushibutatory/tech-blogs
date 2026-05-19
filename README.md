@@ -39,7 +39,7 @@
 
 ##### 画像
 
-tech-imagesで作成・管理すること。
+専用リポジトリ [tech-images](https://github.com/ushibutatory/tech-images) で作成・管理すること。
 画像パスはそちらの公開URLを参照する。
 
 ##### 新規記事作成

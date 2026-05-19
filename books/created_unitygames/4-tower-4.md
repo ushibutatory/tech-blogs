@@ -4,7 +4,8 @@ title: "「タワーディフェンス」(4) フォルダ構成 - C#"
 
 最終的に以下のようになりました。
 
-（見やすさのためにアルファベット順ではなく敢えて入れ替えていたりします）
+- 見やすさのためにアルファベット順ではなく敢えて入れ替えたりしています。
+- 記事用に`MyGame`という仮プロジェクト名に変換しています。
 
 ## フォルダ構成（C# - VisualStudioプロジェクトの構成）
 
@@ -66,7 +67,7 @@ MyGame.Domain/
   Battle/
     Enemy.cs             # エネミーのエンティティクラス
     IEnemyFactory.cs     # Factoryインタフェース
-    Funcions/
+    Functions/
       CalculateDamage.cs               # ダメージ計算
       CalculateEnemySpawnPosition.cs   # スポーン位置計算
 ```

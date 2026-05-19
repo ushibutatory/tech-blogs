@@ -4,7 +4,7 @@ title: "「タワーディフェンス」(5) UI Toolkit関連の処理"
 
 ## 構成
 
-![]()
+![UIの構成](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/created_unitygames/4-tower/UI%E8%A8%AD%E8%A8%88.png)
 
 ### UIViewSection
 
@@ -48,7 +48,7 @@ UIViewの状態を制御します。
 ### Unity
 
 ```text
-Asset/
+Assets/
   _Project/
     UI/
       Uxml/
@@ -67,12 +67,14 @@ namespace MyGame.Presentation.UIs.Shop
     // UIViewSection
     // - UIElementに対する表示や更新を行う
     // - ボタン等のイベントを検知して公開する
+    // - UIViewSection<T>は自作した基底クラス
     public class ShopMenuUIViewSection : UIViewSection<ShopMenuUIViewSection>
     {
         private readonly Subject<Unit> _onBackButtonClicked = new();
         public Observable<Unit> OnBackButtonClicked => _onBackButtonClicked;
 
         // セクションに配置されるUIElement
+        // （QueryKeyは自作したアトリビュート）
         [QueryKey("back-button")] private Button _backButton = default!;
         ...
 
@@ -186,12 +188,39 @@ UIの切り替えは、SceneContextクラスで定義します。
 SceneContextクラスは各シーンに1つずつ配置し、シーンの初期化、イベントや操作に応じてシーン遷移やUI切り替え、BGM変更、入力モードの変更などを行う独自クラスです。
 
 ```csharp
-namespace MyGmae.Presentation.SceneManagement.Home
+namespace MyGame.Presentation.SceneManagement.Home
 {
     public class HomeSceneContext : SceneContext<HomeSceneContext>
     {
         protected override SceneId SceneId => SceneId.Home;
 
+        // 各レイヤーの必要な依存を集約して注入する
+        [Inject] private readonly PresentationDependencies _presentation = default!;
+        public class PresentationDependencies
+        {
+            // Input
+            [Inject] public readonly HomeSceneInputActions InputActions = default!;
+
+            // Camera
+            [Inject] public readonly HomeCamera Camera = default!;
+
+            // UI
+            [Inject] public readonly HomeSceneUINavigator UINavigator = default!;
+
+            ...
+        }
+
+        [Inject] private readonly ApplicationDependencies _application = default!;
+        public class ApplicationDependencies
+        {
+            // UseCase
+            [Inject] public readonly StartHomeSession StartHome = default!;
+            ...
+
+            // Event
+            [Inject] public readonly ISubscriber<HomeSessionStarting> SessionStarting = default!;
+            ...
+        }
         ...
 
         protected override void _Initialize(ISceneParameter.NoParameter parameter)
