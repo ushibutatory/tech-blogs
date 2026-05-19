@@ -66,7 +66,7 @@ MyGame.Domain/
   Battle/
     Enemy.cs             # エネミーのエンティティクラス
     IEnemyFactory.cs     # Factoryインタフェース
-    Funcions/
+    Functions/
       CalculateDamage.cs               # ダメージ計算
       CalculateEnemySpawnPosition.cs   # スポーン位置計算
 ```

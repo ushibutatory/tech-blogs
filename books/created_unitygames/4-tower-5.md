@@ -48,7 +48,7 @@ UIViewの状態を制御します。
 ### Unity
 
 ```text
-Asset/
+Assets/
   _Project/
     UI/
       Uxml/
@@ -186,7 +186,7 @@ UIの切り替えは、SceneContextクラスで定義します。
 SceneContextクラスは各シーンに1つずつ配置し、シーンの初期化、イベントや操作に応じてシーン遷移やUI切り替え、BGM変更、入力モードの変更などを行う独自クラスです。
 
 ```csharp
-namespace MyGmae.Presentation.SceneManagement.Home
+namespace MyGame.Presentation.SceneManagement.Home
 {
     public class HomeSceneContext : SceneContext<HomeSceneContext>
     {
