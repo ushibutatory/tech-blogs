@@ -67,12 +67,14 @@ namespace MyGame.Presentation.UIs.Shop
     // UIViewSection
     // - UIElementに対する表示や更新を行う
     // - ボタン等のイベントを検知して公開する
+    // - UIViewSection<T>は自作した基底クラス
     public class ShopMenuUIViewSection : UIViewSection<ShopMenuUIViewSection>
     {
         private readonly Subject<Unit> _onBackButtonClicked = new();
         public Observable<Unit> OnBackButtonClicked => _onBackButtonClicked;
 
         // セクションに配置されるUIElement
+        // （QueryKeyは自作したアトリビュート）
         [QueryKey("back-button")] private Button _backButton = default!;
         ...
 
@@ -192,6 +194,33 @@ namespace MyGame.Presentation.SceneManagement.Home
     {
         protected override SceneId SceneId => SceneId.Home;
 
+        // 各レイヤーの必要な依存を集約して注入する
+        [Inject] private readonly PresentationDependencies _presentation = default!;
+        public class PresentationDependencies
+        {
+            // Input
+            [Inject] public readonly HomeSceneInputActions InputActions = default!;
+
+            // Camera
+            [Inject] public readonly HomeCamera Camera = default!;
+
+            // UI
+            [Inject] public readonly HomeSceneUINavigator UINavigator = default!;
+
+            ...
+        }
+
+        [Inject] private readonly ApplicationDependencies _application = default!;
+        public class ApplicationDependencies
+        {
+            // UseCase
+            [Inject] public readonly StartHomeSession StartHome = default!;
+            ...
+
+            // Event
+            [Inject] public readonly ISubscriber<HomeSessionStarting> SessionStarting = default!;
+            ...
+        }
         ...
 
         protected override void _Initialize(ISceneParameter.NoParameter parameter)

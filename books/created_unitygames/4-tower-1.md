@@ -263,7 +263,7 @@ Entityを永続化します。
 
 #### Setting
 
-ScriptableObject群です。（→[別ページ](./4-rhythm-5)）
+ScriptableObject群です。（→[別ページ](./4-tower-7)）
 定義した Setting はDIコンテナで各クラスに Inject します。
 
 ## 所感

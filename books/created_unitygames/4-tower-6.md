@@ -66,7 +66,7 @@ title: "「タワーディフェンス」(6) シーン遷移のあれこれ"
 どれぐらい必要になるかは別として「そういう仕組みをやってみよう」でやってみました。
 
 ```csharp
-namespace Elemecho.Presentation.Constants
+namespace MyGame.Presentation.Constants
 {
     /// <summary>
     /// シーン遷移種別
@@ -107,7 +107,7 @@ namespace Elemecho.Presentation.Constants
 `LoadSceneRequest`発行時に、どのようにシーンを読み込むかを指定します。
 
 ```csharp
-namespace Elemecho.Presentation.Events.System
+namespace MyGame.Presentation.Events.System
 {
     public record LoadSceneRequest : PresentationEvent
     {
@@ -130,7 +130,7 @@ namespace Elemecho.Presentation.Events.System
 以下のような構造体（`record struct`）としました。
 
 ```csharp
-namespace Elemecho.Presentation.SceneManagement
+namespace MyGame.Presentation.SceneManagement
 {
     public class SceneNavigator : SystemComponent<SceneLoader>
     {
@@ -160,10 +160,12 @@ namespace Elemecho.Presentation.SceneManagement
 下記コンポーネントを `BootstrapScene` のヒエラルキーに配置しておきます。
 
 ```csharp
-namespace Elemecho.Presentation.SceneManagement.Bootstrap
+namespace MyGame.Presentation.SceneManagement.Bootstrap
 {
     public class BootstrapSceneContext : SceneContext<BootstrapSceneContext>
     {
+        // 起動時の設定をScriptableObjectで定義して注入する
+        [Inject] private readonly BootstrapSceneContextSettings _settings = default!;
         [Inject] private readonly IPublisher<LoadSceneRequest> _loadSceneRequest = default!;
 
         protected override void Start()
@@ -173,10 +175,10 @@ namespace Elemecho.Presentation.SceneManagement.Bootstrap
             UniTask.Void(async () =>
             {
                 // 待機
-                await UniTask.Delay((int)(_delaySeconds * 1000));
+                await UniTask.Delay((int)(_settings.DelaySeconds * 1000));
 
                 // 最初のシーンをロード
-                _presentation.LoadSceneRequest.Publish(LoadSceneRequest.Load(SceneId.Title));
+                _loadSceneRequest.Publish(LoadSceneRequest.Load(SceneId.Title));
             });
         }
     }
