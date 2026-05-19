@@ -185,7 +185,9 @@ UIViewが画面ひとつを表すので、画面切り替えを担うクラス�
 ```
 
 UIの切り替えは、SceneContextクラスで定義します。
-SceneContextクラスは各シーンに1つずつ配置し、シーンの初期化、イベントや操作に応じてシーン遷移やUI切り替え、BGM変更、入力モードの変更などを行う独自クラスです。
+
+なお、SceneContextクラスは独自に定義したクラスです。
+各シーンに1つずつ配置し、シーンの初期化、イベントや操作に応じてシーン遷移やUI切り替え、BGM変更、入力モードの変更などを行います。
 
 ```csharp
 namespace MyGame.Presentation.SceneManagement.Home
@@ -214,7 +216,7 @@ namespace MyGame.Presentation.SceneManagement.Home
         public class ApplicationDependencies
         {
             // UseCase
-            [Inject] public readonly StartHomeSession StartHome = default!;
+            [Inject] public readonly StartHomeSession StartHomeSession = default!;
             ...
 
             // Event

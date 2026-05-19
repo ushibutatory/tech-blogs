@@ -114,6 +114,15 @@ namespace MyGame.Presentation.Events.System
         public SceneId SceneId { get; init; }
         public ISceneParameter Parameter { get; init; }
         public SceneTransitionType SceneTransitionType { get; init; } = SceneTransitionType.Load; // デフォルト動作はLoadとする
+
+        public static LoadSceneRequest Load(SceneId sceneId, ISceneParameter? parameter = null)
+            => new()
+            {
+                NextSceneId = sceneId,
+                TransitionType = SceneTransitionType.Load,
+                Parameter = parameter
+            };
+
         ...
     }
 }
