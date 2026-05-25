@@ -30,13 +30,13 @@ title: "「没にしたゲーム」(0) 概要"
 
 ## ページ一覧
 
-- [アーキテクチャ](./4-tower-1)
-- [フォルダ構成 - GitHubリポジトリ](./4-tower-2)
-- [フォルダ構成 - Unity](./4-tower-3)
-- [フォルダ構成 - C#](./4-tower-4)
-- [UI Toolkit関連の処理](./4-tower-5)
-- [シーン遷移のあれこれ](./4-tower-6)
-- [ScriptableObject](./4-tower-7)
+- [アーキテクチャ](./4-botsu-1)
+- [フォルダ構成 - GitHubリポジトリ](./4-botsu-2)
+- [フォルダ構成 - Unity](./4-botsu-3)
+- [フォルダ構成 - C#](./4-botsu-4)
+- [UI Toolkit関連の処理](./4-botsu-5)
+- [シーン遷移のあれこれ](./4-botsu-6)
+- [ScriptableObject](./4-botsu-7)
 
 ## 反省点
 
