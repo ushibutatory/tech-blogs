@@ -1,5 +1,5 @@
 ---
-title: "「タワーディフェンス」(4) フォルダ構成 - C#"
+title: "「没にしたゲーム」(4) フォルダ構成 - C#"
 ---
 
 最終的に以下のようになりました。
@@ -21,6 +21,7 @@ MyGame/
       TitleSceneLifetimeScope.cs
       ...
 ```
+
 ```text
 # アプリケーション層
 MyGame.Application/
@@ -43,6 +44,7 @@ MyGame.Application/
   System/
     ...
 ```
+
 ```text
 # コア層
 MyGame.Core/
@@ -58,6 +60,7 @@ MyGame.Core/
     Speed.cs      # 速度
     ...
 ```
+
 ```text
 # ドメイン層
 MyGame.Domain/
@@ -71,6 +74,7 @@ MyGame.Domain/
       CalculateDamage.cs               # ダメージ計算
       CalculateEnemySpawnPosition.cs   # スポーン位置計算
 ```
+
 ```text
 # プレゼンテーション層
 MyGame.Presentation/
@@ -91,7 +95,7 @@ MyGame.Presentation/
         PlayerHurtBoxCollider.cs   # プレイヤー当たり判定用のコライダー
         PlayerSpawner.cs           # プレイヤーの出現装置
         ...
-    
+
   # コンポーネント間通信リクエスト（PresentationEvent）
   # 上記のComponents/ではなく別の名前空間に分ける。
   # （他コンポーネントはRequestだけを参照できればよいので）
@@ -132,6 +136,7 @@ MyGame.Presentation/
     ...
 
 ```
+
 ```text
 # インフラストラクチャ層
 MyGame.Infrastructure/
@@ -145,12 +150,12 @@ MyGame.Infrastructure/
   Factories/
     EnemyFactory.cs
     ...
-  
+
   # Repository実装
   Repositories/
     PlayerProfileRepository.cs
     ...
-  
+
   # 外部ファイル保存
   ExternalSave/
     IExternalSaveDataStore.cs   # 外部ファイルI/Oインタフェース

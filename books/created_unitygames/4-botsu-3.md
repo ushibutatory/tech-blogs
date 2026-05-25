@@ -1,5 +1,5 @@
 ---
-title: "「タワーディフェンス」(3) フォルダ構成 - Unity"
+title: "「没にしたゲーム」(3) フォルダ構成 - Unity"
 ---
 
 最終的に以下のようになりました。
@@ -112,7 +112,7 @@ Assets/
 インポートした外部アセットのうち、特にアート系アセットを入れています。
 AssetStoreからインポートした場合はそのフォルダ名のままとし、それ以外の配布サイト等から取得した場合は、ドメインをフォルダ名にして管理するようにしました。
 
-![ThirdPartyフォルダ](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/created_unitygames/4-tower/%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E6%A7%8B%E6%88%90%E3%81%A8%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E5%90%8D_ThirdParty.png)
+![ThirdPartyフォルダ](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/created_unitygames/4-botsu/%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E6%A7%8B%E6%88%90%E3%81%A8%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E5%90%8D_ThirdParty.png)
 
 ## 色々な悩み
 
