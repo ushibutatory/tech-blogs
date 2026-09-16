@@ -1,0 +1,11 @@
+title: ""
+summary: ""
+topics: []
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - 0-intro
+  - 1-architecture
+  - 2-data
+  - z-changelog
