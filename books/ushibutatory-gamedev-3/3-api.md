@@ -10,7 +10,7 @@ Groq の API キーをゲーム内に埋め込みたくなったので、以下�
 
 [別記事](https://zenn.dev/ushibutatory/articles/519dd0c63c3f46e2747f) から抜粋
 
-![構成図](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-2/API%E6%A7%8B%E6%88%90%E5%9B%B3.png)
+![構成図](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-3/API%E6%A7%8B%E6%88%90%E5%9B%B3.png)
 
 - API Gateway の認証方式は Bearer トークンとしました。
 - Groq API キーは Lambda の環境変数とする。
@@ -178,7 +178,7 @@ const response = await groq.chat.completions.create(request);
 
 絵にするとこんな感じです。
 
-![星座イメージ](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-2/%E6%98%9F%E5%BA%A7%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8.png)
+![星座イメージ](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-3/%E6%98%9F%E5%BA%A7%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8.png)
 
 ### 運用コスト
 
