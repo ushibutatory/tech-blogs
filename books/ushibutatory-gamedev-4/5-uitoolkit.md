@@ -1,10 +1,10 @@
 ---
-title: "「没にしたゲーム」(5) UI Toolkit関連の処理"
+title: "UI Toolkit関連の処理"
 ---
 
 ## 構成
 
-![UIの構成](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/created_unitygames/4-botsu/UI%E8%A8%AD%E8%A8%88.png)
+![UIの構成](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-4/UI%E8%A8%AD%E8%A8%88.png)
 
 ### UIViewSection
 

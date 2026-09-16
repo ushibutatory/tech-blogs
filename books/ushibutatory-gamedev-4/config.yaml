@@ -6,4 +6,11 @@ price: 0 # 有料の場合200〜5000
 # 本に含めるチャプターを順番に並べましょう
 chapters:
   - 0-intro
+  - 1-architecture
+  - 2-folder-github
+  - 3-folder-unity
+  - 4-folder-csharp
+  - 5-uitoolkit
+  - 6-scene
+  - 7-scriptableobject
   - z-changelog

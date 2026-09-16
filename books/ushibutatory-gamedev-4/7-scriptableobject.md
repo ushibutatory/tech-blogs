@@ -1,5 +1,5 @@
 ---
-title: "「没にしたゲーム」(7) ScriptableObject"
+title: "ScriptableObject"
 ---
 
 ScriptableObjectを本格的に使うのは初めてだったので苦労しました。
