@@ -1,13 +1,23 @@
 ---
-title: "「星座づくり」(0) 概要"
+title: "はじめに"
 ---
 
-## なにこれ
+趣味で作った Unity ゲーム「星座づくり」の、設計・実装まわりの記録ノートです。
+
+なお、この本は下記シリーズの一部です。シリーズの趣旨なども下記リンク先に記載しています。
+
+- [作ったゲームと設計パターンの試行錯誤まとめ](https://zenn.dev/ushibutatory/articles/442ac51a81bc00)
+
+よろしくお願いいたします。
+
+## どんなゲーム
+
+![イメージ](https://raw.githubusercontent.com/ushibutatory/game-stella_generator-pages/refs/heads/main/images/screenshot2.png)
 
 ランダムに配置される星をつないで、星座を描くゲームです。
 描いた星座の形をもとに、AI に星座名と物語を考えてもらいます。
 
-AI はコスト重視で`Groq API`を採用しました。
+AI は `Groq API` を採用しました。
 
 - 動作確認
   - unityroom
@@ -41,10 +51,4 @@ AI はコスト重視で`Groq API`を採用しました。
 - Node.js
 - `Groq SDK`
   - `Groq API` を実行するため
-
-## ページ一覧
-
-- [アーキテクチャ](./3-seiza-1)
-- [イベント](./3-seiza-2)
-- [外部APIの呼び出し](./3-seiza-3)
-- [privateメンバ多すぎ問題への対処](./3-seiza-4)
+  - なぜ Groq を選んだかというと、無料枠がそれなりにあったからです。

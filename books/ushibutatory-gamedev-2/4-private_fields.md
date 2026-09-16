@@ -1,5 +1,5 @@
 ---
-title: "「星座づくり」(4) privateメンバ多すぎ問題への対処"
+title: "privateメンバ多すぎ問題への対処"
 ---
 
 MonoBehaviour を継承したコンポーネントは、private メンバが多くなりがちです。

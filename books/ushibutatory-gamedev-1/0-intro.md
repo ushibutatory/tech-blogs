@@ -14,6 +14,8 @@ title: "はじめに"
 
 3D の迷路です。
 
+![イメージ](https://raw.githubusercontent.com/ushibutatory/u1w-dungeon/refs/heads/main/docs/thumbnail.png?token=GHSAT0AAAAAAEIZUP5OHDLXU2GBYZGSW3IC2VKFTUA)
+
 - 開発した時期
   - 2020 年頃
 - 実行環境
