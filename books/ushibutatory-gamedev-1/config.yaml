@@ -2,7 +2,8 @@ title: "「3D迷路」設計の振り返り"
 summary: "個人開発のUnityゲーム「3D迷路」の設計についての振り返りです。"
 topics: ["unity", "アーキテクチャ", "個人開発"]
 published: true
-price: 0 # 有料の場合200〜5000
+price: 0
+toc_depth: 3
 chapters:
   - 0-intro
   - 1-architecture

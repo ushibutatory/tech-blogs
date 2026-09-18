@@ -2,8 +2,8 @@ title: "「箱入り娘」設計の振り返り"
 summary: "個人開発のUnityゲーム「箱入り娘」の設計についての振り返りです。"
 topics: ["unity", "アーキテクチャ", "個人開発"]
 published: false
-price: 0 # 有料の場合200〜5000
-# 本に含めるチャプターを順番に並べましょう
+price: 0
+toc_depth: 3
 chapters:
   - 0-intro
   - z-changelog
