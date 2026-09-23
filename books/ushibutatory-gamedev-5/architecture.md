@@ -71,6 +71,7 @@ title: "アーキテクチャ"
 - [Application層](./architecture-application)
 - [Presentation層](./architecture-presentation)
 - [Infrastructure層](./architecture-infrastructure)
+- [各レイヤーのテスト](./architecture-testing)
 
 ## 所感
 

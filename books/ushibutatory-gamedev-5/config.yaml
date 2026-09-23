@@ -12,13 +12,16 @@ chapters:
   - architecture-application
   - architecture-presentation
   - architecture-infrastructure
+  - architecture-testing
   - folder-github
   - folder-unity
   - folder-csharp
   - application-session
   - presentation-components-coop
   - presentation-ui
-  - settings
+  - presentation-persistent
+  - infrastructure-settings
+  - vcontainer-lifetimescope
   - y-gitignore
   - y-tag
   - z-changelog
