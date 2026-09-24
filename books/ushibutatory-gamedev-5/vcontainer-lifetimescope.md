@@ -181,7 +181,7 @@ namespace WordPuzzle.LifetimeScopes.Scenes
         {
             // ------ Domain ------
             // Domain
-            builder.Register<IRandomFactory, SeededRandomFactory>(Lifetime.Scoped);
+            builder.Register<IRandomFactory, ProductRandomFactory>(Lifetime.Scoped);
 
             // Domain - InGameComponents - Repositories
             builder.RegisterInstance(settings.Domain.FieldConfigurationRepository);

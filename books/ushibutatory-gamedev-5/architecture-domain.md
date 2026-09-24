@@ -200,7 +200,7 @@ Entityの永続化に関するインタフェースです。
 ::: details 例
 
 ```csharp
-namespace WordPuzzle.Domain.InGameComponents.Repositories
+namespace WordPuzzle.Domain.InGameComponents.Cards.Repositories
 {
     public interface INounCardDefinitionsRepository
     {

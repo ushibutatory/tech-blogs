@@ -22,7 +22,7 @@ title: "アーキテクチャ"
 
 ### asmdef配置
 
-`Assembly-Csharp` を使わないようにしています。
+`Assembly-CSharp` を使わないようにしています。
 
 ![スクショ](/folder-scripts.png)
 
@@ -44,8 +44,8 @@ Assets/_Project/
             WordPuzzle.Presentation.asmdef
     Scripts.Editor/
         # エディタスクリプト
-        WordPuzzle.CardImport/
-            WordPuzzle.CardImport.asmdef
+        WordPuzzle.Domain.Editor/
+            WordPuzzle.Domain.Editor.asmdef
         ...
     Scripts.Tests/
         # 各レイヤー及びエディターのテストスクリプト
