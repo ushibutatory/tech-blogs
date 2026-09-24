@@ -158,6 +158,71 @@ namespace WordPuzzle.Presentation.Effect.Requests
 
 :::
 
+### Listener
+
+アプリケーション層のSessionEventを購読するコンポーネントです。
+
+セッション状態の変更通知をコンポーネントが直接購読してもいいのですが、あれもこれも制御しなければならない、それらの処理順序保証をしなければならない、という場合に使用しました。
+
+::: details コード
+
+```csharp
+namespace WordPuzzle.Presentation.Scenes.InGame.Listeners
+{
+    public class HandUpdatedListener : EventListener<HandUpdatedListener>
+    {
+        [Inject] private readonly ApplicationDependencies _application = default!;
+        public class ApplicationDependencies
+        {
+            [Inject] public readonly ISubscriber<HandUpdated> HandUpdated = default!;
+        }
+
+        [Inject] private readonly PresentationDependencies _presentation = default!;
+        public class PresentationDependencies
+        {
+            [Inject] public readonly PlayerBoardComponent PlayerBoard = default!;
+            [Inject] public readonly LayoutConductor LayoutConductor = default!;
+            [Inject] public readonly CardPool CardPool = default!;
+
+            [Inject] public readonly IInGameCardAnimationSettings AnimationSettings = default!;
+        }
+
+        protected override void _SetupSubscribes()
+        {
+            base._SetupSubscribes();
+
+            _application.HandUpdated.Subscribe(async e =>
+            {
+                // 手札を再描画
+                _presentation.PlayerBoard.Rebuild(e.Hand);
+
+                switch (e.Reason)
+                {
+                    case HandUpdated.ReasonType.CardAdded:
+                    case HandUpdated.ReasonType.CardRemoved:
+                        // カードを移動
+                        _MoveCardsToHandAsync(e.Hand).Forget();
+                        break;
+
+                    case HandUpdated.ReasonType.CardTrashed:
+                        // カードを破棄
+                        foreach (var cardId in e.CardIds)
+                            _presentation.CardPool.Despawn(cardId);
+                        break;
+                }
+
+                // 全体レイアウトの調整
+                await _presentation.LayoutConductor.ConductAsync();
+            }).AddTo(_disposables);
+        }
+
+        ...
+    }
+}
+```
+
+:::
+
 ### PresentationSettingsインタフェース
 
 プレゼンテーション層の挙動を指定する設定群です。

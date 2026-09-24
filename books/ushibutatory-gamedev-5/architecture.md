@@ -4,27 +4,29 @@ title: "アーキテクチャ"
 
 ## 概要
 
+レイヤードアーキテクチャを意識して作成しました。
+
+![レイヤー間の参照](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-5/architecture-layers.png)
+
 ### 構成
 
-![レイヤー間の参照]()
+| レイヤー       | 概要                         | 参照先                                  |
+| -------------- | ---------------------------- | --------------------------------------- |
+| Core           | 汎用インタフェース、列挙型   | なし                                    |
+| Domain         | データモデル、ドメインルール | Core                                    |
+| Application    | ユースケース、状態管理       | Core, Domain                            |
+| Presentation   | ゲームオブジェクト、UI       | Core, Application                       |
+| Infrastructure | 外部リソース                 | Core, Domain, Application, Presentation |
 
-![アーキテクチャ]()
+![アーキテクチャイメージ](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-5/architecture.png)
 
-| レイヤー       | 概要                           | 参照先                                  |
-| -------------- | ------------------------------ | --------------------------------------- |
-| Core           | 汎用インタフェース、列挙型     | なし                                    |
-| Domain         | ビジネスロジック               | Core                                    |
-| Application    | ユースケース、進行管理         | Core, Domain                            |
-| Presentation   | UI、MonoBehaviour              | Core, Application                       |
-| Infrastructure | ScriptableObjectや外部IOの実装 | Core, Domain, Application, Presentation |
-
-プレゼンテーション層の設定をSOで行うために、インフラ層もプレゼンテーション層を参照している。
+※図の中ではCoreは省略
 
 ### asmdef配置
 
 `Assembly-CSharp` を使わないようにしています。
 
-![スクショ](/folder-scripts.png)
+![スクショ](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-5/folder-scripts.png)
 
 ```text
 Assets/_Project/
@@ -75,5 +77,5 @@ Assets/_Project/
 
 ## 所感
 
-ここはどうすればよかったのかな、みたいな細かい反省がたくさんあります。
+ここはどうすればいいのかな、みたいな悩みはたくさんあり、少しずつ対応しながら構築していました。
 もう少し経験を積めばもっと柔軟かつ堅牢な構成が作れるようになるでしょうが、まだまだ勉強不足だなと感じます。
