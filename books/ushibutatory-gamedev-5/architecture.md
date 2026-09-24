@@ -18,7 +18,7 @@ title: "アーキテクチャ"
 | Presentation   | UI、MonoBehaviour              | Core, Application                       |
 | Infrastructure | ScriptableObjectや外部IOの実装 | Core, Domain, Application, Presentation |
 
-プレゼンテーション層の設定をSOで行うために、インフラ層もプレゼン層を参照している。
+プレゼンテーション層の設定をSOで行うために、インフラ層もプレゼンテーション層を参照している。
 
 ### asmdef配置
 
@@ -26,36 +26,36 @@ title: "アーキテクチャ"
 
 ![スクショ](/folder-scripts.png)
 
-```bash
-/Assets/_Project
-    /Scripts
+```text
+Assets/_Project/
+    Scripts/
         # 各レイヤーのスクリプト
-        /WordPuzzle
+        WordPuzzle/
             WordPuzzle.asmdef
-        /WordPuzzle.Application
+        WordPuzzle.Application/
             WordPuzzle.Application.asmdef
-        /WordPuzzle.Core
+        WordPuzzle.Core/
             WordPuzzle.Core.asmdef
-        /WordPuzzle.Domain
+        WordPuzzle.Domain/
             WordPuzzle.Domain.asmdef
-        /WordPuzzle.Infrastructure
+        WordPuzzle.Infrastructure/
             WordPuzzle.Infrastructure.asmdef
-        /WordPuzzle.Presentation
+        WordPuzzle.Presentation/
             WordPuzzle.Presentation.asmdef
-    /Scripts.Editor
+    Scripts.Editor/
         # エディタスクリプト
-        /WordPuzzle.CardImport
-            /WordPuzzle.CardImport.asmdef
-        /...
-    /Scripts.Tests
+        WordPuzzle.CardImport/
+            WordPuzzle.CardImport.asmdef
+        ...
+    Scripts.Tests/
         # 各レイヤー及びエディターのテストスクリプト
-        /WordPuzzle.Application.Tests
-            /WordPuzzle.Application.Tests.asmdef
-        /WordPuzzle.Core.Tests
-            /WordPuzzle.Core.Tests.asmdef
+        WordPuzzle.Application.Tests/
+            WordPuzzle.Application.Tests.asmdef
+        WordPuzzle.Core.Tests/
+            WordPuzzle.Core.Tests.asmdef
         ...
     ...
-    /Input
+    Input/
         # 例外的に、InputActionsのasmdefはレイヤー構造とは独立させている。
         # レイヤードアーキテクチャの外にある、入力ライブラリという位置づけ。
         WordPuzzle.Input.asmdef

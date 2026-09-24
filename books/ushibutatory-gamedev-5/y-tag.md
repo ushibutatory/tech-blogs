@@ -10,19 +10,18 @@ title: "余談 - タグの設計"
 
 ### タグの種類
 
-| タグの種類 | 意味                               | 例                                                         |
-| ---------- | ---------------------------------- | ---------------------------------------------------------- |
-| ICanTag    | 能動的な能力として「何ができるか」 | can_walk（歩ける）, can_eat（食事できる）                  |
-| ICanBeTag  | 受動的な能力として「何をされるか」 | be_eaten（食べられる）, be_chased（追いかけられる）        |
-| IIsTag     | 分類として「何であるか」           | is_place（場所である）, is_animal（動物である）            |
-| IIsAbleTag | 状態として「何になりえるか」       | is_ageable（歳を取りうる）, is_sizable（サイズ可変である） |
+| タグの種類 | 意味                               | 例                                                         | 備考                              |
+| ---------- | ---------------------------------- | ---------------------------------------------------------- | --------------------------------- |
+| ICanTag    | 能動的な能力として「何ができるか」 | can_walk（歩ける）, can_eat（食事できる）                  |                                   |
+| ICanBeTag  | 受動的な能力として「何をされるか」 | be_eaten（食べられる）, be_chased（追いかけられる）        |                                   |
+| IIsTag     | 分類として「何であるか」           | is_place（場所である）, is_animal（動物である）            |                                   |
+| IIsAbleTag | 状態として「何になりえるか」       | is_ageable（歳を取りうる）, is_sizable（サイズ可変である） | 内部的には IsTag の一部として処理 |
 
 #### 例
 
 - 名詞「猫」
-  - Is
+  - Is, IsAble
     - `is_animal`
-  - IsAble
     - `is_sizable`, `is_weightable`, `is_speedable`, ...
   - Can
     - `can_walk`, `can_run`, `can_jump`, `can_eat`, `can_sleep`, ...
@@ -32,7 +31,7 @@ title: "余談 - タグの設計"
   - Can
     - `can_walk`
 - 形容詞「大きい」
-  - IsAble
+  - Is, IsAble
     - `is_sizable`
 
 つまり、「歩く」がつながる名詞は、`can_walk`を持つ名詞のみとなります。

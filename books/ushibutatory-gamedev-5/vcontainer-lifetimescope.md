@@ -309,3 +309,7 @@ namespace WordPuzzle.LifetimeScopes.Scenes
 ![シーンごとのLifetimeScopeをHierarchyに配置](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-5/vcontainer-scenelifetimescope-hierarchy.png)
 
 ## 所感
+
+やっと少しだけ扱いに慣れてきました。
+
+まだ `Awake()` や `Start()` を十分に使いこなせていない感じがするので、引き続き勉強していきたいです。

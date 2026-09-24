@@ -148,7 +148,7 @@ namespace WordPuzzle.Application.InGame.UseCases.Implements
 }
 ```
 
-検証結果を`switch`で分岐させていますが、Errorの場合にearly returnしてもいいと思います。どっちがいいんだろう。
+検証結果を `switch` で分岐させていますが、 Failure の場合に early return したほうがよかったかもしれません。
 
 :::
 

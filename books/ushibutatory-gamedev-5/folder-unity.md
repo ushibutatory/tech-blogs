@@ -2,6 +2,8 @@
 title: "フォルダ構成 - Unityプロジェクト"
 ---
 
+![フォルダ構成 - Unity](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-5/folder-unity.png)
+
 最終的に以下のようになりました。
 
 - 見やすさのためにアルファベット順ではなく敢えて入れ替えたりしています。
@@ -12,7 +14,7 @@ title: "フォルダ構成 - Unityプロジェクト"
 Assets/
     _Project/   # 原則、この中に成果物を入れる
         Scenes/ # シーンごとのコンポーネント
-            /FooScene
+            FooScene/
                 FooScene.scene
                 FooSceneLifetimeScope.prefab
                 Prefabs/    # シーン内で使用するPrefab

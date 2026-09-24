@@ -116,8 +116,7 @@ UIの表示を行うクラスです。MonoBehaviour は継承しません。
 
 今回は UI Toolkit を使用しました。
 
-別ページにしました。
-→[|zenn](./x-presentation-ui)
+[別ページ](./presentation-ui)にまとめました。
 
 ### PresentationEvent
 

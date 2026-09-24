@@ -139,7 +139,7 @@ namespace WordPuzzle.Infrastructure.Settings.Domain.Score
 
 :::
 
-[別ページ](infrastructure-settings)に分割しました。
+[別ページ](./infrastructure-settings)に分割しました。
 
 ## 所感
 
