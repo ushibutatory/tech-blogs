@@ -12,15 +12,15 @@ title: "フォルダ構成 - Unityプロジェクト"
 
 ```text
 Assets/
-    _Project/   # 原則、この中に成果物を入れる
-        Scenes/ # シーンごとのコンポーネント
+    _Project/                              # 原則、この中に成果物を入れる
+        Scenes/                            # シーンごとのコンポーネント
             FooScene/
                 FooScene.scene
                 FooSceneLifetimeScope.prefab
-                Prefabs/    # シーン内で使用するPrefab
+                Prefabs/                   # シーン内で使用するPrefab
                     ...
 
-        Scripts/             # C#スクリプト（レイヤーごとにasmdefを作成する）
+        Scripts/                           # C#スクリプト（レイヤーごとにasmdefを作成する）
             WordPuzzle/
                 WordPuzzle.asmdef
                 ...
@@ -28,7 +28,7 @@ Assets/
                 WordPuzzle.Domain.asmdef
                 ...
             ...
-        Scripts.Tests/       # テスト（Scripts の隣に並ぶように命名）
+        Scripts.Tests/                     # テスト（Scripts の隣に並ぶように命名）
             WordPuzzle.Tests/
                 WordPuzzle.Tests.asmdef
                 ...
@@ -37,38 +37,38 @@ Assets/
                 ...
             ...
         Scripts.Editors/
-            WordPuzzle.Core.Editor/             # 独自型をインスペクタ表示するためのEditorライブラリ
+            WordPuzzle.Core.Editor/        # 独自型をインスペクタ表示するためのEditorライブラリ
                 WordPuzzle.Core.Editor.asmdef
                 ...
-            ...                                 # 必要に応じてレイヤーごとにEditorを定義する
+            ...                           # 必要に応じてレイヤーごとにEditorを定義する
 
-        Settings/              # Settings（ScriptableObject）群
+        Settings/                          # Settings（ScriptableObject）群
             WordPuzzle.Domain/
             WordPuzzle.Application/
             ...
 
-        Database/           # スプレッドシートから自動生成したアセット群
+        Database/                          # スプレッドシートから自動生成したアセット群
             ...
 
-        Art/                 # アート関連（テクスチャ、マテリアル等）
+        Art/                               # アート関連（テクスチャ、マテリアル等）
             ...
 
-        UI/                  # UI関連（今回はUI Toolkitを使用）
+        UI/                                # UI関連（今回はUI Toolkitを使用）
             ...
 
-        Input/                                  # 入力定義
-            WordPuzzle.Input.asmdef             # asmdef を分けておく
+        Input/                             # 入力定義
+            WordPuzzle.Input.asmdef        # asmdef を分けておく
             WordPuzzleInputActions.inputactions
-            WordPuzzleInputActions.cs           # 自動生成される.csファイル
+            WordPuzzleInputActions.cs      # 自動生成される.csファイル
 
-        Localization/        # ローカライゼーション関連
+        Localization/                     # ローカライゼーション関連
             LocalizationSettings.asset
             Japanese.asset
             ...
 
     # 外部アセットは `_Project` の外に置き、Addressablesで管理する。
     ThirdParty/
-        sample.com/         # アセット名、配布サイト名、作者アカウント名などでフォルダ名をつける
+        sample.com/                      # アセット名、配布サイト名、作者アカウント名などでフォルダ名をつける
             ...
         @ushibutatory/
             ...
