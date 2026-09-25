@@ -142,7 +142,7 @@ namespace WordPuzzle.Presentation.Scenes.InGame
         public class PersistentComponents
         {
             [Inject] public readonly SceneNavigator SceneNavigator = default!;
-            [Inject] public readonly AudioPlayer Audio = default!;
+            [Inject] public readonly IAudioController Audio = default!;
         }
 
         private InGameSceneParameter _sceneParameter = default!;

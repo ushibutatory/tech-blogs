@@ -13,7 +13,7 @@ MonoBehaviour を継承したコンポーネントです。
 
 - 命名ルール
   - 本体コンポーネント : `-Component`
-  - 機能コンポーネント : `-able`、またはUnityコンポーネント名（`Colider`等）
+  - 機能コンポーネント : `-able`、またはUnityコンポーネント名（`Collider`等）
 
 - 例）
   - Cardオブジェクト
@@ -21,7 +21,7 @@ MonoBehaviour を継承したコンポーネントです。
     - CardMovable（カードを移動させる機能コンポーネント）
     - CardHighlightable（カードをハイライトさせる機能コンポーネント）
     - CardTappable（カードをタップ可能にする機能コンポーネント）
-    - CardColider（カードの当たり判定コンポーネント）
+    - CardCollider（カードの当たり判定コンポーネント）
 
 ::: details 例
 

@@ -79,7 +79,7 @@ WordPuzzle.Domain/
             VerbCard.cs                  # 動詞カード（entity）
             ...
             Repositories/
-                INounCardRepository.cs   # 名詞カードのリポジトリインタフェース
+                INounCardDefinitionsRepository.cs   # 名詞カードの定義情報のリポジトリインタフェース
                 ...
         Tags/
             ...
@@ -220,7 +220,7 @@ WordPuzzle.Presentation/
                     IInGameCardAnimationSettings.cs # カードのアニメーション設定インタフェース
                     ...
             Input/                        # 入力
-                InGameSceneInputHandler.cs # InputActionsを扱いやすいイベントに変換する
+                InGameInputHandler.cs     # InputActionsを扱いやすいイベントに変換する
             Listeners/                    # アプリケーションイベントの購読
                 HandUpdatedListener.cs    # 手札が更新されたことを検知して他のコンポーネントを操作する
                 ...

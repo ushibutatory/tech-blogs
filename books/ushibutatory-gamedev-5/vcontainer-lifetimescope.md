@@ -148,7 +148,7 @@ namespace WordPuzzle.LifetimeScopes
         private void _Configure_Settings(IContainerBuilder builder)
         {
             builder.RegisterInstance<IProductSettings>(_productSettings);
-            builder.RegisterInstance<DebugSettings>(_debugSettings);
+            builder.RegisterInstance<IDebugSettings>(_debugSettings);
         }
     }
 }
@@ -162,7 +162,7 @@ Prefabを作成し、上記の _RootLifetimeScope_ をアタッチします。
 
 ![RootLifetimeScopeのPrefabのInspector](https://raw.githubusercontent.com/ushibutatory/tech-images/refs/heads/main/books/ushibutatory-gamedev-5/vcontainer-rootlifetimescope-prefab-details.png)
 
-上記の Prefab を、`VContainterSettings`の`RootLifetimeScope`に指定して完了です。
+上記の Prefab を、`VContainerSettings`の`RootLifetimeScope`に指定して完了です。
 
 ## シーンごとのLifetimeScope
 
@@ -185,7 +185,7 @@ namespace WordPuzzle.LifetimeScopes.Scenes
 
             // Domain - InGameComponents - Repositories
             builder.RegisterInstance(settings.Domain.FieldConfigurationRepository);
-            builder.RegisterInstance(settings.Domain.NounCardRepository);
+            builder.RegisterInstance(settings.Domain.NounCardDefinitionsRepository);
             ...
 
             // Domain - InGameMechanics - Grammar
