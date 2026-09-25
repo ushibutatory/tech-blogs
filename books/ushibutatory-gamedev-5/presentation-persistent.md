@@ -55,13 +55,6 @@ namespace WordPuzzle.LifetimeScopes.Scenes
             builder.RegisterInstance<ILocalizationService>(settings.Presentation.LocalizationService);
             ...
 
-            // Presentation - GlobalUIs
-            builder.Register<IGlobalUIController, GlobalUIController>(Lifetime.Scoped);
-            builder.Register<IConfirmDialog, ConfirmDialog>(Lifetime.Transient);
-            builder.Register<ILoadingOverlay, LoadingOverlay>(Lifetime.Transient);
-            builder.Register<IToastNotification, ToastNotification>(Lifetime.Transient);
-            ...
-
             // Presentation - Audio
             builder.Register<IAudioController, AudioController>(Lifetime.Scoped);
             ...
