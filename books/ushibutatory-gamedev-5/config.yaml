@@ -1,7 +1,7 @@
 title: "「ことばパズル」設計の振り返り"
 summary: "個人開発のUnityゲーム「ことばパズル」の設計についての振り返りです。"
 topics: ["unity", "アーキテクチャ", "個人開発"]
-published: false
+published: true
 price: 0
 toc_depth: 3
 chapters:
