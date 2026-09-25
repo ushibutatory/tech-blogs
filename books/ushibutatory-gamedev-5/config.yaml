@@ -17,6 +17,7 @@ chapters:
   - folder-unity
   - folder-csharp
   - application-session
+  - presentation-scene
   - presentation-components-coop
   - presentation-ui
   - presentation-persistent
